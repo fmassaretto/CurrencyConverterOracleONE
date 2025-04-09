@@ -17,6 +17,7 @@ repositories {
 
 dependencies {
     implementation("jakarta.validation:jakarta.validation-api:3.1.1")
+    implementation("io.github.cdimascio:java-dotenv:5.2.2")
     implementation("com.google.code.gson:gson:2.12.1")
     implementation("org.projectlombok:lombok:1.18.38")
     // Use JUnit Jupiter for testing.

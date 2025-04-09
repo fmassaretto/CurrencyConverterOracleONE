@@ -2,6 +2,7 @@ package com.fabio.client;
 
 import com.fabio.model.ExchangeRate;
 import com.google.gson.Gson;
+import io.github.cdimascio.dotenv.Dotenv;
 
 import java.io.IOException;
 import java.net.URI;
@@ -12,10 +13,12 @@ import java.net.http.HttpResponse;
 
 public class ExchangeRateClientImpl implements ExchangeRateClient {
     private final Gson gson = new Gson();
+    private final Dotenv dotenv = Dotenv.load();
 
     @Override
     public ExchangeRate getExchangeRate(String currency) throws URISyntaxException, IOException, InterruptedException {
-        var url = "https://v6.exchangerate-api.com/v6/29206e31240c027e2a812828/latest/" + currency;
+        String apiKey = dotenv.get("EXCHANGE_RATE_API_KEY");
+        var url = "https://v6.exchangerate-api.com/v6/" + apiKey + "/latest/" + currency;
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(new URI(url))
